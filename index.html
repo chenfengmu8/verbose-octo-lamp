@@ -1,338 +1,206 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>興達工安文件資源庫 | 官方發布</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-gradient: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+        }
 
-<title>文件下載中心 | 官方版本發布</title>
-<meta name="description" content="提供最新版本 Word 文件下載，請確認版本日期後下載。">
-<meta property="og:title" content="文件下載中心">
-<meta property="og:description" content="官方最新版本文件下載區">
-<meta property="og:type" content="website">
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
 
-<link rel="icon" href="favicon.ico">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-<style>
-:root {
-    --primary-color: #2563eb;
-    --bg-gradient: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
-}
+        header h1 {
+            font-weight: 700;
+            color: #1e293b;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
 
-body {
-    font-family: 'Noto Sans TC', sans-serif;
-    background: var(--bg-gradient);
-    min-height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-}
+        .search-box {
+            margin-bottom: 40px;
+        }
 
-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
+        .search-box input {
+            width: 320px;
+            padding: 12px 18px;
+            border-radius: 30px;
+            border: 1px solid #cbd5e1;
+            font-size: 14px;
+            outline: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
 
-header h1 {
-    font-weight: 700;
-    color: #1e293b;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-}
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+        }
 
-header p {
-    color: #64748b;
-}
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
 
-/* 搜尋列 */
-.search-box {
-    margin-bottom: 40px;
-}
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+        }
 
-.search-box input {
-    width: 320px;
-    padding: 12px 18px;
-    border-radius: 30px;
-    border: 1px solid #cbd5e1;
-    font-size: 14px;
-    outline: none;
-}
+        .file-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
 
-/* Grid */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-    width: 100%;
-    max-width: 1200px;
-}
+        .file-name {
+            font-size: 1.1rem;
+            color: #334155;
+            font-weight: 500;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
 
-/* 卡片 */
-.card {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
-    padding: 24px;
-    text-align: center;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
+        .download-btn {
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 12px 0;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            display: block;
+        }
 
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
-}
+        .download-btn:hover {
+            background: #1d4ed8;
+        }
 
-.file-icon {
-    font-size: 48px;
-    margin-bottom: 15px;
-    color: var(--primary-color);
-}
+        .update-tag {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 15px;
+        }
 
-.file-name {
-    font-size: 1.1rem;
-    color: #334155;
-    font-weight: 500;
-    margin-bottom: 15px;
-    word-break: break-all;
-}
+        .no-result {
+            text-align: center;
+            color: #64748b;
+            margin-top: 30px;
+            display: none;
+        }
 
-.download-btn {
-    background: var(--primary-color);
-    color: white;
-    text-decoration: none;
-    padding: 12px 0;
-    border-radius: 12px;
-    font-size: 0.9rem;
-    transition: 0.3s;
-}
-
-.download-btn:hover {
-    opacity: 0.9;
-}
-
-.update-tag {
-    font-size: 0.75rem;
-    color: #64748b;
-    margin-top: 10px;
-}
-
-.no-result {
-    text-align: center;
-    color: #64748b;
-    margin-top: 30px;
-    display: none;
-}
-</style>
+        footer {
+            margin-top: auto;
+            padding: 40px 0;
+            color: #94a3b8;
+            font-size: 0.8rem;
+        }
+    </style>
 </head>
-
 <body>
 
 <header>
     <h1>興達工安文件資源庫</h1>
-    <p>請下載最新版本文件</p>
+    <p>請搜尋並下載最新版本文件</p>
 </header>
 
 <div class="search-box">
-    <input type="text" id="searchInput" placeholder="搜尋文件名稱...">
+    <input type="text" id="searchInput" placeholder="輸入關鍵字搜尋文件...">
 </div>
 
 <div class="grid" id="fileGrid">
-
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">興達發電廠承攬商開工前安全衛生協商會議紀錄</div>
-        <a href="files/01_project_plan.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/20</div>
-    </div>
-
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">興達發電廠發包工程(作)開工前告知承攬商安全衛生紀錄表</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">興達發電廠共同作業協議組織會議紀錄</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">工具箱會議及預知危險活動（TBM-KY）紀錄表</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">動用火種工作許可證</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">特種車輛進廠申請單</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">特種車輛入廠作業前安全衛生紀錄表</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">特種車輛入廠作業前安全衛生紀錄表(台電其它單位)</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">承攬商65歲以上工作人員切結書</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-    
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">承攬商職業安全衛生管理人員設置報備申請書</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-    
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">物料器材暫置告示牌</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-    
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">交付承攬工程（作）「工程（作）檢驗員工安抽查紀錄表」</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-        
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">承攬商現場工作安全檢查表</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-            
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">局限空間作業場所進入許可證</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-            
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">局限空間作業前作業場所檢點表</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-            
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">局限空間作業前作業安全檢核表</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-            
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">局限空間氣體濃度測定紀錄表</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-            
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">局限空間作業人員進出管制表</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-                
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">交付承攬工程(作)水下作業通報表</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
-                
-    <div class="card">
-        <div class="file-icon">📄</div>
-        <div class="file-name">水下及潛水作業工作(程)告示牌</div>
-        <a href="files/02_meeting_notes.docx" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">最後更新：2024/05/21</div>
-    </div>
+    <p style="text-align: center; grid-column: 1/-1;">正在載入文件列表...</p>
 </div>
-<p>By C.F.M</p>
-   
 
 <div class="no-result" id="noResult">查無符合的文件</div>
 
+<footer>By C.F.M | 興達發電廠</footer>
+
 <script>
-const searchInput = document.getElementById("searchInput");
-const cards = document.querySelectorAll(".card");
-const noResult = document.getElementById("noResult");
-
-searchInput.addEventListener("keyup", function () {
-    const keyword = this.value.toLowerCase();
-    let visibleCount = 0;
-
-    cards.forEach(card => {
-        const fileName = card.querySelector(".file-name").innerText.toLowerCase();
-
-        if (fileName.includes(keyword)) {
-            card.style.display = "flex";
-            visibleCount++;
-        } else {
-            card.style.display = "none";
-        }
-    });
-
-    noResult.style.display = visibleCount === 0 ? "block" : "none";
-});
-</script>
-<script>
+// 1. 從 data.json 獲取資料
 fetch('data.json')
-  .then(response => response.json())
-  .then(data => {
-    const container = document.getElementById('formList');
+    .then(response => {
+        if (!response.ok) throw new Error('無法讀取 data.json');
+        return response.json();
+    })
+    .then(data => {
+        const container = document.getElementById('fileGrid');
+        container.innerHTML = ''; // 清除「載入中」文字
 
-    data.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'card';
+        data.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div>
+                    <div class="file-icon">📄</div>
+                    <div class="file-name">${item.name}</div>
+                </div>
+                <div>
+                    <a href="${item.file}" download class="download-btn">下載文件</a>
+                    <div class="update-tag">最後更新：${item.date}</div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
 
-      card.innerHTML = `
-        <div class="file-icon">📄</div>
-        <div class="file-name">${item.name}</div>
-        <a href="${item.file}" target="_blank" class="download-btn">下載文件</a>
-        <div class="update-tag">
-          版本：${item.version} ｜ 最後更新：${item.date}
-        </div>
-      `;
-
-      container.appendChild(card);
+        // 載入完成後開啟搜尋監聽
+        initSearch();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('fileGrid').innerHTML = '<p style="color:red;">資料載入出錯，請檢查 data.json 格式或路徑。</p>';
     });
-  });
-</script>
-</body>
 
+// 2. 搜尋功能邏輯
+function initSearch() {
+    const searchInput = document.getElementById("searchInput");
+    const noResult = document.getElementById("noResult");
+
+    searchInput.addEventListener("keyup", function () {
+        const keyword = this.value.toLowerCase();
+        const cards = document.querySelectorAll(".card");
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const fileName = card.querySelector(".file-name").innerText.toLowerCase();
+            if (fileName.includes(keyword)) {
+                card.style.display = "flex";
+                visibleCount++;
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        noResult.style.display = visibleCount === 0 ? "block" : "none";
+    });
+}
+</script>
+
+</body>
 </html>
