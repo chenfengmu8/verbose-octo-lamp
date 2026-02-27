@@ -1,20 +1,12 @@
 [
   {
     "name": "興達發電廠承攬商開工前安全衛生協商會議紀錄",
-    "version": "v1.0",
-    "date": "2024/05/20",
-    "file": "files/01_project_plan.docx"
-  },
-  {
-    "name": "興達發電廠發包工程(作)開工前告知承攬商安全衛生紀錄表",
-    "version": "v1.0",
-    "date": "2024/05/21",
-    "file": "files/02_meeting_notes.docx"
+    "file": "files/01_project_plan.docx",
+    "date": "2024/05/20"
   },
   {
     "name": "興達發電廠共同作業協議組織會議紀錄",
-    "version": "v1.0",
-    "date": "2024/05/21",
-    "file": "files/03_cooperation.docx"
+    "file": "files/02_meeting_notes.docx",
+    "date": "2024/05/21"
   }
 ]
