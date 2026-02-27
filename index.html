@@ -310,6 +310,29 @@ searchInput.addEventListener("keyup", function () {
     noResult.style.display = visibleCount === 0 ? "block" : "none";
 });
 </script>
+<script>
+fetch('data.json')
+  .then(response => response.json())
+  .then(data => {
+    const container = document.getElementById('formList');
 
+    data.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      card.innerHTML = `
+        <div class="file-icon">📄</div>
+        <div class="file-name">${item.name}</div>
+        <a href="${item.file}" target="_blank" class="download-btn">下載文件</a>
+        <div class="update-tag">
+          版本：${item.version} ｜ 最後更新：${item.date}
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+  });
+</script>
 </body>
+
 </html>
