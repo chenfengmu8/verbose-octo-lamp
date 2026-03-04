@@ -44,28 +44,56 @@
             font-size: 1.8rem; /* 手機端標題優化 */
         }
 
+/* 1. 搜尋框外部容器：負責定位與手機間距 */
         .search-box {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             width: 100%;
             display: flex;
             justify-content: center;
+            padding: 0 20px; /* 增加手機端左右緩衝 */
+            box-sizing: border-box;
         }
 
+        /* 2. 輸入框本體：實踐水態玻璃效果 */
         .search-box input {
-            width: 90%;
-            max-width: 400px; /* 電腦端限制最大寬度 */
-            padding: 14px 20px;
-            border-radius: 30px;
-            border: 1px solid var(--glass-border);
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            font-size: 16px; /* 關鍵：防止 iPhone 點擊輸入框時畫面自動放大 */
+            /* 寬度適配：手機 90%，電腦最大 400px */
+            width: 100%;
+            max-width: 400px; 
+            
+            /* 核心：水態玻璃樣式 */
+            background: rgba(255, 255, 255, 0.3); /* 更通透的半透明白 */
+            backdrop-filter: blur(15px); /* 稍微加強模糊感，更有高級感 */
+            -webkit-backdrop-filter: blur(15px);
+            
+            /* 邊框與光澤 */
+            border: 1px solid rgba(255, 255, 255, 0.5); /* 亮色邊框模擬玻璃邊緣 */
+            border-radius: 50px; /* 膠囊狀圓角更現代 */
+            
+            padding: 14px 22px;
+            font-size: 16px; /* 防止 iOS 點擊自動放大畫面 */
+            color: #1e293b;
             outline: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            color: var(--text-dark);
+            
+            /* 陰影優化：柔和的懸浮感 */
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            
+            /* 平滑動畫 */
+            transition: all 0.3s ease;
         }
 
+        /* 3. 聚焦效果：增加互動光澤感 */
+        .search-box input:focus {
+            background: rgba(255, 255, 255, 0.5); /* 聚焦時變亮一點 */
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(37, 99, 235, 0.15); /* 稍微帶點藍色的發光感 */
+            transform: translateY(-2px); /* 輕微上浮 */
+        }
+
+        /* 修正 Placeholder 文字顏色，讓它在玻璃背景下更清晰 */
+        .search-box input::placeholder {
+            color: rgba(30, 41, 59, 0.5);
+        }
+        
         .grid {
             display: grid;
             /* 關鍵：使用 auto-fill 與 minmax 實現手機與電腦自動換列 */
@@ -254,6 +282,7 @@ function initSearch() {
 
 </body>
 </html>
+
 
 
 
