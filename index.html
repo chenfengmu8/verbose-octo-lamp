@@ -60,50 +60,62 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
+            /* 核心：水態玻璃效果設定 */
+            background: rgba(255, 255, 255, 0.4); /* 設定半透明白色底色，讓背景透出來 */
+            backdrop-filter: blur(12px); /* 關鍵：讓背景產生水氣般的模糊感 */
+            -webkit-backdrop-filter: blur(12px); /* 針對 Safari 瀏覽器的相容性優化 */
+            /* 邊框與光澤感 */
+            border: 1px solid rgba(255, 255, 255, 0.5); /* 加上極細半透明白邊，模擬玻璃邊緣光澤 */
+            border-radius: 20px; /* 維持大圓角設計，讓視覺更柔和 */        
             padding: 24px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 加入更平滑且帶有彈性的過渡動畫 */
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            justify-content: space-between;        
+            /* 陰影優化：讓玻璃看起來浮在背景上方 */
+             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px) scale(1.02); /* 滑鼠移入時往上浮起並輕微放大 */
+            background: rgba(255, 255, 255, 0.6); /* 移入時增加一點亮度，模擬光線反射 */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* 增加陰影深度，加強懸浮感 */
+            border: 1px solid rgba(255, 255, 255, 0.8); /* 邊框變亮，呈現邊緣受光感 */
         }
 
         .file-icon {
             font-size: 48px;
             margin-bottom: 15px;
-            color: var(--primary-color);
+            color: #1e40af; /* 稍微加深藍色，確保在透明底色上清晰可見 */
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); /* 給圖示加一點小陰影增加層次 */
         }
 
         .file-name {
             font-size: 1.1rem;
-            color: #334155;
-            font-weight: 500;
+            color: #1e293b; /* 使用深藍灰色文字，提升閱讀品質 */
+            font-weight: 600; /* 加粗字體避免被背景模糊干擾 */
             margin-bottom: 15px;
             line-height: 1.5;
-            word-break: break-all;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.5); /* 文字下方加點微弱亮影，增加清晰度 */
         }
 
         .download-btn {
-            background: var(--primary-color);
+            background: rgba(37, 99, 235, 0.85); /* 按鈕也採用半透明設計，維持整體風格 */
+            backdrop-filter: blur(4px); /* 按鈕本身也帶有一點模糊 */
             color: white;
             text-decoration: none;
             padding: 12px 0;
             border-radius: 12px;
             font-size: 0.9rem;
+            font-weight: bold;
             transition: 0.3s;
-            display: block;
+            border: 1px solid rgba(255, 255, 255, 0.2); /* 按鈕邊框 */
         }
 
         .download-btn:hover {
-            background: #1d4ed8;
+            background: #1d4ed8; /* 滑鼠移入按鈕後變回實色，增加操作確信感 */
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4); /* 增加按鈕發光感 */
         }
 
         .update-tag {
@@ -213,6 +225,7 @@ function initSearch() {
 
 </body>
 </html>
+
 
 
 
