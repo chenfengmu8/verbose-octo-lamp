@@ -149,20 +149,30 @@
         }
 
         .download-btn {
-            background: var(--primary-color);
+         /* 1. 寬度與佈局控制 */
+            display: block;           /* 轉為區塊元素，使其能撐滿寬度 */
+            width: 60%;             /* 撐滿父容器（卡片）的寬度 */
+            max-width: 200px;        /* 【選填】如果你覺得 100% 太寬，可以設定最大寬度並配合 margin 置中 */
+            margin: 15px auto 0;     /* 關鍵：auto 會讓按鈕在卡片內水平置中；15px 是與上方文字的距離 */
+            box-sizing: border-box;  /* 確保 Padding 不會超出寬度 */
+
+        /* 2. 文字對齊 */
+            text-align: center;      /* 關鍵：確保「下載文件」這四個字在按鈕正中央 */
+            background: rgba(37, 99, 235, 0.85); /* 按鈕也採用半透明設計，維持整體風格 */
+            backdrop-filter: blur(4px); /* 按鈕本身也帶有一點模糊 */
             color: white;
             text-decoration: none;
-            padding: 14px 0;
-            border-radius: 16px;
-            font-size: 0.95rem;
+            padding: 8px 8PX;
+            border-radius: 8px;
+            font-size: 0.9rem;
             font-weight: bold;
             transition: 0.3s;
-            display: block;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2); /* 按鈕邊框 */
         }
 
-        .download-btn:active {
-            transform: scale(0.97); /* 手機端點擊回饋 */
+        .download-btn:hover {
+            background: #1d4ed8; /* 滑鼠移入按鈕後變回實色，增加操作確信感 */
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4); /* 增加按鈕發光感 */
         }
 
         .update-tag {
@@ -282,6 +292,7 @@ function initSearch() {
 
 </body>
 </html>
+
 
 
 
