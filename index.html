@@ -11,111 +11,130 @@
     <style>
         :root {
             --primary-color: #2563eb;
-            --bg-gradient: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+            /* 定義水態玻璃變數，方便統一修改 */
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --text-dark: #1e293b;
         }
 
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background: var(--bg-gradient);
+            /* 背景稍微增加色彩細節，能讓水態玻璃效果更明顯 */
+            background: linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%);
+            background-attachment: fixed; 
             min-height: 100vh;
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 20px;
+            padding: 20px; /* 手機端邊距縮小，增加可視空間 */
         }
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            padding: 0 10px;
         }
 
         header h1 {
             font-weight: 700;
-            color: #1e293b;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
+            color: var(--text-dark);
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            font-size: 1.8rem; /* 手機端標題優化 */
         }
 
         .search-box {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         .search-box input {
-            width: 320px;
-            padding: 12px 18px;
+            width: 90%;
+            max-width: 400px; /* 電腦端限制最大寬度 */
+            padding: 14px 20px;
             border-radius: 30px;
-            border: 1px solid #cbd5e1;
-            font-size: 14px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            font-size: 16px; /* 關鍵：防止 iPhone 點擊輸入框時畫面自動放大 */
             outline: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            color: var(--text-dark);
         }
 
         .grid {
             display: grid;
+            /* 關鍵：使用 auto-fill 與 minmax 實現手機與電腦自動換列 */
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            gap: 20px;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1100px;
         }
 
         .card {
-            /* 核心：水態玻璃效果設定 */
-            background: rgba(255, 255, 255, 0.4); /* 設定半透明白色底色，讓背景透出來 */
-            backdrop-filter: blur(12px); /* 關鍵：讓背景產生水氣般的模糊感 */
-            -webkit-backdrop-filter: blur(12px); /* 針對 Safari 瀏覽器的相容性優化 */
-            /* 邊框與光澤感 */
-            border: 1px solid rgba(255, 255, 255, 0.5); /* 加上極細半透明白邊，模擬玻璃邊緣光澤 */
-            border-radius: 20px; /* 維持大圓角設計，讓視覺更柔和 */        
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
             padding: 24px;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 加入更平滑且帶有彈性的過渡動畫 */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;        
-            /* 陰影優化：讓玻璃看起來浮在背景上方 */
-             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            justify-content: space-between;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
         }
 
-        .card:hover {
-            transform: translateY(-10px) scale(1.02); /* 滑鼠移入時往上浮起並輕微放大 */
-            background: rgba(255, 255, 255, 0.6); /* 移入時增加一點亮度，模擬光線反射 */
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* 增加陰影深度，加強懸浮感 */
-            border: 1px solid rgba(255, 255, 255, 0.8); /* 邊框變亮，呈現邊緣受光感 */
+        /* 電腦端 hover 效果，手機端會忽略或點擊觸發 */
+        @media (min-width: 769px) {
+            .card:hover {
+                transform: translateY(-8px) scale(1.02);
+                background: rgba(255, 255, 255, 0.55);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+                border: 1px solid rgba(255, 255, 255, 0.8);
+            }
         }
 
         .file-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-            color: #1e40af; /* 稍微加深藍色，確保在透明底色上清晰可見 */
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); /* 給圖示加一點小陰影增加層次 */
+            font-size: 44px;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
 
         .file-name {
-            font-size: 1.1rem;
-            color: #1e293b; /* 使用深藍灰色文字，提升閱讀品質 */
-            font-weight: 600; /* 加粗字體避免被背景模糊干擾 */
-            margin-bottom: 15px;
-            line-height: 1.5;
-            text-shadow: 0 1px 2px rgba(255,255,255,0.5); /* 文字下方加點微弱亮影，增加清晰度 */
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 18px;
+            line-height: 1.4;
+            /* 關鍵：防止長檔名在手機上撐破卡片，超過兩行自動縮略 */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            word-break: break-all;
         }
 
         .download-btn {
-            background: rgba(37, 99, 235, 0.85); /* 按鈕也採用半透明設計，維持整體風格 */
-            backdrop-filter: blur(4px); /* 按鈕本身也帶有一點模糊 */
+            background: var(--primary-color);
             color: white;
             text-decoration: none;
-            padding: 12px 0;
-            border-radius: 12px;
-            font-size: 0.9rem;
+            padding: 14px 0;
+            border-radius: 16px;
+            font-size: 0.95rem;
             font-weight: bold;
             transition: 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.2); /* 按鈕邊框 */
+            display: block;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
         }
 
-        .download-btn:hover {
-            background: #1d4ed8; /* 滑鼠移入按鈕後變回實色，增加操作確信感 */
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4); /* 增加按鈕發光感 */
+        .download-btn:active {
+            transform: scale(0.97); /* 手機端點擊回饋 */
         }
 
         .update-tag {
@@ -129,14 +148,24 @@
             color: #64748b;
             margin-top: 30px;
             display: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         footer {
-            margin-top: auto;
-            padding: 40px 0;
+            margin-top: 40px;
+            padding: 20px 0;
             color: #94a3b8;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+        }
+
+        /* 針對窄螢幕手機的微調 */
+        @media (max-width: 360px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -225,6 +254,7 @@ function initSearch() {
 
 </body>
 </html>
+
 
 
 
