@@ -10,8 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2563eb;
-            /* 定義水態玻璃變數，方便統一修改 */
+            --primary-color: #2563eb;            
             --glass-bg: rgba(255, 255, 255, 0.4);
             --glass-border: rgba(255, 255, 255, 0.5);
             --text-dark: #1e293b;
@@ -19,7 +18,6 @@
 
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            /* 背景稍微增加色彩細節，能讓水態玻璃效果更明顯 */
             background: linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%);
             background-attachment: fixed; 
             min-height: 100vh;
@@ -27,7 +25,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px; /* 手機端邊距縮小，增加可視空間 */
+            padding: 20px;
         }
 
         header {
@@ -41,62 +39,54 @@
             color: var(--text-dark);
             letter-spacing: 1.5px;
             margin-bottom: 8px;
-            font-size: 1.8rem; /* 手機端標題優化 */
+            font-size: 1.8rem;
         }
 
-        /* 1. 搜尋框外部容器：負責定位與手機間距 */
         .search-box {
             margin-bottom: 40px;
             width: 100%;
             display: flex;
             justify-content: center;
-            padding: 0 20px; /* 增加手機端左右緩衝 */
+            padding: 0 20px;
             box-sizing: border-box;
         }
-
-        /* 2. 輸入框本體：實踐水態玻璃效果 */
+       
         .search-box input {
-            /* 寬度適配：手機 90%，電腦最大 400px */
             width: 100%;
             max-width: 400px; 
             
-            /* 核心：水態玻璃樣式 */
-            background: rgba(255, 255, 255, 0.3); /* 更通透的半透明白 */
-            backdrop-filter: blur(15px); /* 稍微加強模糊感，更有高級感 */
+           
+            background: rgba(255, 255, 255, 0.3); 
+            backdrop-filter: blur(15px); 
             -webkit-backdrop-filter: blur(15px);
             
-            /* 邊框與光澤 */
-            border: 1px solid rgba(255, 255, 255, 0.5); /* 亮色邊框模擬玻璃邊緣 */
-            border-radius: 50px; /* 膠囊狀圓角更現代 */
+
+            border: 1px solid rgba(255, 255, 255, 0.5); 
+            border-radius: 50px;
             
             padding: 14px 22px;
-            font-size: 16px; /* 防止 iOS 點擊自動放大畫面 */
+            font-size: 16px; 
             color: #1e293b;
-            outline: none;
-            
-            /* 陰影優化：柔和的懸浮感 */
+            outline: none;                      
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
             
-            /* 平滑動畫 */
+            
             transition: all 0.3s ease;
         }
-
-        /* 3. 聚焦效果：增加互動光澤感 */
+        
         .search-box input:focus {
-            background: rgba(255, 255, 255, 0.5); /* 聚焦時變亮一點 */
+            background: rgba(255, 255, 255, 0.5); 
             border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 8px 32px 0 rgba(37, 99, 235, 0.15); /* 稍微帶點藍色的發光感 */
-            transform: translateY(-2px); /* 輕微上浮 */
+            box-shadow: 0 8px 32px 0 rgba(37, 99, 235, 0.15); 
+            transform: translateY(-2px); 
         }
-
-        /* 修正 Placeholder 文字顏色，讓它在玻璃背景下更清晰 */
+     
         .search-box input::placeholder {
             color: rgba(30, 41, 59, 0.5);
         }
         
         .grid {
-            display: grid;
-            /* 關鍵：使用 auto-fill 與 minmax 實現手機與電腦自動換列 */
+            display: grid;            
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
             width: 100%;
@@ -117,8 +107,7 @@
             justify-content: space-between;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
         }
-
-        /* 電腦端 hover 效果，手機端會忽略或點擊觸發 */
+    
         @media (min-width: 769px) {
             .card:hover {
                 transform: translateY(-8px) scale(1.02);
@@ -140,7 +129,6 @@
             font-weight: 600;
             margin-bottom: 18px;
             line-height: 1.4;
-            /* 關鍵：防止長檔名在手機上撐破卡片，超過兩行自動縮略 */
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -149,17 +137,14 @@
         }
 
         .download-btn {
-         /* 1. 寬度與佈局控制 */
-            display: block;           /* 轉為區塊元素，使其能撐滿寬度 */
-            width: 60%;             /* 撐滿父容器（卡片）的寬度 */
-            max-width: 200px;        /* 【選填】如果你覺得 100% 太寬，可以設定最大寬度並配合 margin 置中 */
-            margin: 15px auto 0;     /* 關鍵：auto 會讓按鈕在卡片內水平置中；15px 是與上方文字的距離 */
-            box-sizing: border-box;  /* 確保 Padding 不會超出寬度 */
-
-        /* 2. 文字對齊 */
-            text-align: center;      /* 關鍵：確保「下載文件」這四個字在按鈕正中央 */
-            background: rgba(37, 99, 235, 0.85); /* 按鈕也採用半透明設計，維持整體風格 */
-            backdrop-filter: blur(4px); /* 按鈕本身也帶有一點模糊 */
+            display: block;         
+            width: 60%;             
+            max-width: 200px;        
+            margin: 15px auto 0;     
+            box-sizing: border-box; 
+            text-align: center;     
+            background: rgba(37, 99, 235, 0.85); 
+            backdrop-filter: blur(4px);
             color: white;
             text-decoration: none;
             padding: 8px 8PX;
@@ -167,12 +152,12 @@
             font-size: 0.9rem;
             font-weight: bold;
             transition: 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.2); /* 按鈕邊框 */
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .download-btn:hover {
-            background: #1d4ed8; /* 滑鼠移入按鈕後變回實色，增加操作確信感 */
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4); /* 增加按鈕發光感 */
+            background: #1d4ed8;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4); 
         }
 
         .update-tag {
@@ -292,6 +277,7 @@ function initSearch() {
 
 </body>
 </html>
+
 
 
 
