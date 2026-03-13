@@ -206,7 +206,7 @@
 
         /* 手機端與小螢幕優化 */
         @media (max-width: 768px) {
-            .preview-box { display: none !important; } /* 手機端停用預覽 */
+            .preview-box { display: none !important; }
             .download-btn { width: 100%; }
         }
 
@@ -253,7 +253,6 @@ fetch('data.json')
         data.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            // 注意：這裡加入了 preview-box 結構，並讀取 item.image
             card.innerHTML = `
                 <div>
                     <div class="file-icon">📄</div>
@@ -302,4 +301,5 @@ function initSearch() {
 
 </body>
 </html>
+
 
