@@ -124,18 +124,17 @@
             line-height: 1.4;
             position: relative;
             cursor: help;
-            display: inline-block; /* 確保寬度符合文字 */
+            display: inline-block;
         }
         
-        /* 預覽視窗樣式 */
-        .preview-box {
+         .preview-box {
             display: none;
             position: absolute;
             bottom: 115%;
             left: 50%;
             transform: translateX(-50%);
             width: 220px;
-            background: white;
+            background: var(--glass-bg);
             border-radius: 18px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             padding: 8px;
@@ -303,3 +302,4 @@ function initSearch() {
 
 </body>
 </html>
+
