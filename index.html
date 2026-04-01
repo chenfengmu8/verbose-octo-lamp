@@ -349,6 +349,9 @@
 <footer>By C.F.M </footer>
 
 <script>
+    if (navigator.userAgent.indexOf('Line') > -1) {
+    alert("建議點擊右上角「...」，選擇「使用預設瀏覽器開啟」，以確保文件能正常下載。");
+}
 // 1. 從 data.json 獲取資料
 fetch('data.json')
     .then(response => {
@@ -374,7 +377,7 @@ fetch('data.json')
                     </div>
                 </div>
                 <div>
-                    <a href="${item.file}" download class="download-btn">下載文件</a>
+                    <a href="${item.file}" target="_blank" rel="noopener noreferrer" class="download-btn">下載文件</a>
                     <div class="update-tag">最後更新：${item.date}</div>
                 </div>
             `;
