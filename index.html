@@ -124,10 +124,10 @@
             line-height: 1.4;
             position: relative;
             cursor: help;
-            display: inline-block; /* 確保寬度符合文字 */
+            display: inline-block;
         }
         
-        /* 預覽視窗樣式 */
+      
         .preview-box {
             display: none;
             position: absolute;
@@ -244,27 +244,26 @@
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);          
             transition: all 0.3s ease;          
             margin-bottom:10px;  
-            resize: none;           /* textarea 不可拖拉大小 */
-            outline: none;          /* 移除點擊黑色外框 */
-            box-sizing: border-box; /* 避免padding影響寬度 */
+            resize: none;        
+            outline: none;         
+            box-sizing: border-box; 
             }
 
-            /* 2. 新增：強制解決「自動填入」導致的變色問題 */
+          
             .feedback-box input:-webkit-autofill,
             .feedback-box input:-webkit-autofill:hover, 
             .feedback-box input:-webkit-autofill:focus,
             .feedback-box textarea:-webkit-autofill,
             .feedback-box textarea:-webkit-autofill:hover,
             .feedback-box textarea:-webkit-autofill:focus {
-                /* 使用巨大的內陰影來覆蓋掉瀏覽器的預設藍色 */
                 -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.6) inset !important;
-                /* 設定自動填入後的文字顏色，確保可見 */
+                
                 -webkit-text-fill-color: #1e293b !important;
-                /* 這裡透過 transition 延遲背景色的變化，讓它看起來像沒變 */
+                
                 transition: background-color 5000s ease-in-out 0s;
             }
 
-            /* 3. 額外建議：滑鼠點擊時稍微亮一點，增加互動感 */
+            
             .feedback-box input:focus,
             .feedback-box textarea:focus {
                 background: rgba(255, 255, 255, 0.4);
@@ -295,9 +294,9 @@
             box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
             }
 
-        /* 手機端與小螢幕優化 */
+        
         @media (max-width: 768px) {
-            .preview-box { display: none !important; } /* 手機端停用預覽 */
+            .preview-box { display: none !important; }
             .download-btn { width: 100%; }
         }
 
@@ -352,7 +351,7 @@
     if (navigator.userAgent.indexOf('Line') > -1) {
     alert("建議點擊右上角「...」，選擇「使用預設瀏覽器開啟」，以確保文件能正常下載。");
 }
-// 1. 從 data.json 獲取資料
+
 fetch('data.json')
     .then(response => {
         if (!response.ok) throw new Error('無法讀取 data.json');
@@ -365,7 +364,7 @@ fetch('data.json')
         data.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            // 注意：這裡加入了 preview-box 結構，並讀取 item.image
+           
             card.innerHTML = `
                 <div>
                     <div class="file-icon">📄</div>
@@ -425,17 +424,17 @@ document.getElementById("feedbackForm").addEventListener("submit", function(e) {
         message: document.getElementById("message").value
     };
 
-    // 使用 fetch 發送到 GAS
+  
     fetch(API_URL, {
         method: "POST",
-        mode: "no-cors", // 💡 強制不檢查 CORS
+        mode: "no-cors", 
         headers: {
-            "Content-Type": "text/plain" // 💡 改用 text/plain 避開預檢
+            "Content-Type": "text/plain" 
         },
         body: JSON.stringify(data)
     })
     .then(() => {
-        // 因為是 no-cors，fetch 無法讀取回傳值，只要沒報錯就視為成功
+       
         statusEl.innerText = "✅ 已送出感謝您的建議";
         statusEl.style.color = "green";
         document.getElementById("feedbackForm").reset();
